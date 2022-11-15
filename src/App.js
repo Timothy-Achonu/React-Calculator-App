@@ -9,16 +9,19 @@ class App extends Component {
 
     this.state = {
       content: "",
+      answer : "",
     };
   }
   getButtonContent = (e) => {
      console.log(e.target.textContent, 'Clicked')
      this.setState(prevContent => {
       if(e.target.textContent === "=") {
-        return {content : 111}
+        return {...this.state,
+           answer : 111}
+
       }
      return (
-      {content : this.state.content+e.target.textContent}
+      {...this.state, content : this.state.content+e.target.textContent}
      )
     })
   }
@@ -54,7 +57,7 @@ class App extends Component {
       <div className="App">
         <h1>Calculator</h1>
         <div className="caculator-structure">
-          <Screen content={this.state.content}/>
+          <Screen values={this.state}/>
           <div className="button-wrapper">{buttons}</div>
         </div>
       </div>
