@@ -15,12 +15,25 @@ class App extends Component {
   calculateAnswer() {
     let numsArray = this.state.content.split(" ");
     let result;
+    result = Number(numsArray[0]);
     numsArray.forEach((item, index) => {
       if (!Number(item)) {
-       result = numsArray[index - 1] + numsArray[index + 1];
+        if (item === "+") {
+          result = result + Number(numsArray[index + 1]);
+        }
+        if (item === "-") {
+          result = result - Number(numsArray[index + 1]);
+        }
+        if (item === "*") {
+          result = result * Number(numsArray[index + 1]);
+        }
+        if (item === "/") {
+          result = result / Number(numsArray[index + 1]);
+        }
       }
     });
-    console.log(numsArray);
+    console.log(numsArray, result);
+    return result;
   }
   getButtonContent = (e) => {
     this.setState((prevContent) => {
@@ -28,19 +41,19 @@ class App extends Component {
         return { content: "0", answer: "" };
       }
       if (e.target.textContent === "=") {
-        this.calculateAnswer();
-        return { ...this.state, answer: 111 };
+        let result = this.calculateAnswer();
+        return { ...this.state, answer: result };
       }
       if (this.state.content === "0") {
         return { ...this.state, content: e.target.textContent };
       }
       if (!Number(e.target.textContent)) {
-        if (e.target.textContent === "+") {
+        if (e.target.textContent != "0") {
+          return {
+            ...this.state,
+            content: this.state.content + " " + e.target.textContent + " ",
+          };
         }
-        return {
-          ...this.state,
-          content: this.state.content + " " + e.target.textContent + " ",
-        };
       }
       return {
         ...this.state,
