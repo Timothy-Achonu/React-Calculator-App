@@ -49,7 +49,7 @@ class App extends Component {
         return { ...this.state, content: e.target.textContent };
       }
       if (!Number(e.target.textContent)) {
-        if (e.target.textContent != "0") {
+        if (e.target.textContent !== "0") {
           return {
             ...this.state,
             content: this.state.content + " " + e.target.textContent + " ",
@@ -64,7 +64,6 @@ class App extends Component {
   };
   handleDarkMode = () => {
       this.setState(prev => {
-        console.log(prev)
         return {
           ...this.state, darkMode: !prev.darkMode
         }

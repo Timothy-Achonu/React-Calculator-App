@@ -87,3 +87,19 @@
   border: 1px solid white;
   color: white;
 }
+
+@media (max-width : 600px) {
+  .caculator-structure {
+    width: 300px;
+
+  }
+}
+@media (max-width : 400px) {
+  .caculator-structure {
+    width: 190px;
+    height: fit-content;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 0 4px 5px rgba(0, 0, 0, 1);
+  }
+}
