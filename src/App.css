@@ -1,12 +1,4 @@
-.App {
-  text-align: center;
-  display: grid;
-  /* place-content: center; */
-  /* grid-template-rows: 1fr; */
-  min-height: 100vh;
-  width: 100%;
-  background-color: yellow;
-}
+
 
 
 
@@ -16,14 +8,43 @@
   margin: 0;
   box-sizing: border-box;
 }
+.App {
+  text-align: center;
+  display: grid;
+  place-content: center;
+  grid-template-columns: 100%;
+  min-height: 100vh;
+  width: 100%;
+}
+.App.bgDark {
+  background-color: black;
+  color: white;
+}
+.darkmode {
+  position: absolute;
+  font-size: 1.6em;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  top: 10%;
+  left: 10%;
+}
+.App.bgDark .darkmode {
+  background-color: white;
+  color: black;
+}
 
 .caculator-structure {
-  max-width: 500px;
+  width: 500px;
   height: fit-content;
-  background-color: gray;
   margin: 0 auto;
   margin-top: 20px;
-  box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 4px 5px rgba(0, 0, 0, 1);
+}
+.App.bgDark .caculator-structure {
+  box-shadow: 0 0 4px 5px rgba(255, 255, 255, 1);
 }
 
 .screen {
@@ -37,10 +58,12 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+.App.bgDark .screen {
+  border: 2px solid white;
+}
 .screen .answer {
   margin-top: 10px;
   font-size: 1.7rem;
-
 }
 
 
@@ -58,4 +81,9 @@
   background-color: white;
   border: 1px solid black;
   border-collapse: collapse;
+}
+.App.bgDark .button-wrapper button {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
 }

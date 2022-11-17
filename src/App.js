@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       content: "0",
       answer: "",
+      darkMode: false
     };
   }
   calculateAnswer() {
@@ -61,6 +62,14 @@ class App extends Component {
       };
     });
   };
+  handleDarkMode = () => {
+      this.setState(prev => {
+        console.log(prev)
+        return {
+          ...this.state, darkMode: !prev.darkMode
+        }
+      })
+  }
 
   render() {
     const buttonValues = [
@@ -92,7 +101,8 @@ class App extends Component {
       );
     });
     return (
-      <div className="App">
+      <div className={`App ${this.state.darkMode ? "bgDark" : ""}`}>
+        <div className="darkmode" onClick={this.handleDarkMode}>++</div>
         <h1>Calculator</h1>
         <div className="caculator-structure">
           <Screen values={this.state} />
