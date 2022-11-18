@@ -2,6 +2,8 @@ import "./App.css";
 import React, { Component } from "react";
 import Screen from "./components/Screen";
 import Button from "./components/Button";
+import nightMode from './assets/night-mode.png'
+import sun from './assets/sun.png'
 
 class App extends Component {
   constructor(props) {
@@ -101,7 +103,10 @@ class App extends Component {
     });
     return (
       <div className={`App ${this.state.darkMode ? "bgDark" : ""}`}>
-        <div className="darkmode" onClick={this.handleDarkMode}>++</div>
+        <div className="darkmode" onClick={this.handleDarkMode}>
+         { !this.state.darkMode && <img src={nightMode} alt="dark-mode-icon"/>}  
+         { this.state.darkMode && <img src={sun} alt="dark-mode-icon" className="sun"/>}  
+        </div>
         <h1>Calculator</h1>
         <div className="caculator-structure">
           <Screen values={this.state} />
