@@ -98,6 +98,9 @@ img {
     width: 300px;
 
   }
+  img {
+    width: 40px;
+  }
 }
 @media (max-width : 400px) {
   .caculator-structure {
@@ -106,5 +109,8 @@ img {
     margin: 0 auto;
     margin-top: 20px;
     box-shadow: 0 0 4px 5px rgba(0, 0, 0, 1);
+  }
+  img {
+    width: 30px;
   }
 }
