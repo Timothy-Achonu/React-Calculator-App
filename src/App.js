@@ -2,8 +2,8 @@ import "./App.css";
 import React, { Component } from "react";
 import Screen from "./components/Screen";
 import Button from "./components/Button";
-import nightMode from './assets/night-mode.png'
-import sun from './assets/sun.png'
+import nightMode from "./assets/night-mode.png";
+import sun from "./assets/sun.png";
 
 class App extends Component {
   constructor(props) {
@@ -12,29 +12,57 @@ class App extends Component {
     this.state = {
       content: "0",
       answer: "",
-      darkMode: false
+      darkMode: false,
     };
   }
   calculateAnswer() {
     let numsArray = this.state.content.split(" ");
-    let result;
-    result = Number(numsArray[0]);
+    let result = numsArray[0];
+    //BODMAS
     numsArray.forEach((item, index) => {
       if (!Number(item)) {
-        if (item === "+") {
-          result = result + Number(numsArray[index + 1]);
-        }
-        if (item === "-") {
-          result = result - Number(numsArray[index + 1]);
-        }
-        if (item === "*") {
-          result = result * Number(numsArray[index + 1]);
-        }
         if (item === "/") {
-          result = result / Number(numsArray[index + 1]);
+          result = Number(numsArray[index + 1]) / Number(numsArray[index + 1]);
         }
       }
     });
+    numsArray.forEach((item, index) => {
+      if (!Number(item)) {
+        if (item === "*") {
+          if (result || result === 0) {
+            result = result * Number(numsArray[index + 1]);
+          } else {
+            result =
+              Number(numsArray[index + 1]) * Number(numsArray[index + 1]);
+          }
+        }
+      }
+    });
+    numsArray.forEach((item, index) => {
+      if (!Number(item)) {
+        if (item === "+") {
+          if (result || result === 0) {
+            result = result + Number(numsArray[index + 1]);
+          } else {
+            result =
+              Number(numsArray[index + 1]) + Number(numsArray[index + 1]);
+          }
+        }
+      }
+    });
+    numsArray.forEach((item, index) => {
+      if (!Number(item)) {
+        if (item === "-") {
+          if (result || result === 0) {
+            result = result - Number(numsArray[index + 1]);
+          } else {
+            result =
+              Number(numsArray[index + 1]) - Number(numsArray[index + 1]);
+          }
+        }
+      }
+    });
+
     console.log(numsArray, result);
     return result;
   }
@@ -65,12 +93,13 @@ class App extends Component {
     });
   };
   handleDarkMode = () => {
-      this.setState(prev => {
-        return {
-          ...this.state, darkMode: !prev.darkMode
-        }
-      })
-  }
+    this.setState((prev) => {
+      return {
+        ...this.state,
+        darkMode: !prev.darkMode,
+      };
+    });
+  };
 
   render() {
     const buttonValues = [
@@ -104,8 +133,10 @@ class App extends Component {
     return (
       <div className={`App ${this.state.darkMode ? "bgDark" : ""}`}>
         <div className="darkmode" onClick={this.handleDarkMode}>
-         { !this.state.darkMode && <img src={nightMode} alt="dark-mode-icon"/>}  
-         { this.state.darkMode && <img src={sun} alt="dark-mode-icon" className="sun"/>}  
+          {!this.state.darkMode && <img src={nightMode} alt="dark-mode-icon" />}
+          {this.state.darkMode && (
+            <img src={sun} alt="dark-mode-icon" className="sun" />
+          )}
         </div>
         <h1>Calculator</h1>
         <div className="caculator-structure">
