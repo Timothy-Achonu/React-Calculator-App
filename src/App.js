@@ -17,23 +17,34 @@ class App extends Component {
   }
   calculateAnswer() {
     let numsArray = this.state.content.split(" ");
-    let result = numsArray[0];
+    let result;
     //BODMAS
     numsArray.forEach((item, index) => {
       if (!Number(item)) {
         if (item === "/") {
-          result = Number(numsArray[index + 1]) / Number(numsArray[index + 1]);
+          console.log("in divide", result)
+          if (result || result === 0) {
+            result = result / Number(numsArray[index + 1]);
+            console.log("in divide 1", result)
+          } else {
+            result =
+              Number(numsArray[index - 1]) / Number(numsArray[index + 1]);
+              console.log("in divide 2", result)
+          }
         }
       }
     });
     numsArray.forEach((item, index) => {
       if (!Number(item)) {
         if (item === "*") {
+          console.log("in multiply", result)
           if (result || result === 0) {
-            result = result * Number(numsArray[index + 1]);
+            result = Number(numsArray[index - 1]) * result;
+            console.log("in multiply 1", result, Number(numsArray[index + 1]))
           } else {
             result =
-              Number(numsArray[index + 1]) * Number(numsArray[index + 1]);
+              Number(numsArray[index - 1]) * Number(numsArray[index + 1]);
+              console.log("in multiply 2", result)
           }
         }
       }
@@ -41,11 +52,14 @@ class App extends Component {
     numsArray.forEach((item, index) => {
       if (!Number(item)) {
         if (item === "+") {
+          console.log("in add", result)
           if (result || result === 0) {
-            result = result + Number(numsArray[index + 1]);
+            result = Number(numsArray[index - 1]) + result;
+            console.log("in add 1", result)
           } else {
             result =
-              Number(numsArray[index + 1]) + Number(numsArray[index + 1]);
+              Number(numsArray[index - 1]) + Number(numsArray[index + 1]);
+              console.log("in add 2", result)
           }
         }
       }
@@ -53,11 +67,14 @@ class App extends Component {
     numsArray.forEach((item, index) => {
       if (!Number(item)) {
         if (item === "-") {
+          console.log("in subtract", result)
           if (result || result === 0) {
-            result = result - Number(numsArray[index + 1]);
+            result = Number(numsArray[index - 1]) - result;
+            console.log("in subtract 1", result)
           } else {
             result =
-              Number(numsArray[index + 1]) - Number(numsArray[index + 1]);
+              Number(numsArray[index - 1]) - Number(numsArray[index + 1]);
+              console.log("in subtract 2", result)
           }
         }
       }
