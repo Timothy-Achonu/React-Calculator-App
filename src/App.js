@@ -35,7 +35,6 @@ class App extends Component {
         }
       }
     });
-    console.log(numsArray, result);
     return result;
   }
   getButtonContent = (e) => {
@@ -45,18 +44,33 @@ class App extends Component {
       }
       if (e.target.textContent === "=") {
         let result = this.calculateAnswer();
-        return { ...this.state, answer: result };
+        return { ...prevContent, answer: result };
       }
       if (this.state.content === "0") {
         return { ...this.state, content: e.target.textContent };
       }
-      if (!Number(e.target.textContent)) {
-        if (e.target.textContent !== "0") {
+      if (!Number(e.target.textContent) && e.target.textContent !== "x") {
+        if (e.target.textContent !== "0" && e.target.textContent !== ".") {
+          if(this.state.content.split(" ").length >= 3) {
+            let result = this.calculateAnswer();
+            return {
+              content: result + " " + e.target.textContent + " ",
+              answer : result
+            };
+          }
           return {
             ...this.state,
             content: this.state.content + " " + e.target.textContent + " ",
           };
         }
+      }
+      if(e.target.textContent === "x") {
+        let newContentLength = this.state.content.length - 1
+        let newContent = this.state.content.substring(0, newContentLength);
+        return {
+          ...this.state,
+          content: newContent,
+        };
       }
       return {
         ...this.state,
@@ -75,6 +89,8 @@ class App extends Component {
   render() {
     const buttonValues = [
       "C",
+      ".",
+      "x",
       0,
       1,
       2,
@@ -90,6 +106,7 @@ class App extends Component {
       "*",
       "/",
       "=",
+
     ];
 
     const buttons = buttonValues.map((button, index) => {

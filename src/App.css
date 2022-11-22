@@ -87,6 +87,9 @@ img {
   border: 1px solid black;
   border-collapse: collapse;
 }
+.button-wrapper .bigButton{
+  width: 50%;
+}
 .App.bgDark .button-wrapper button {
   background-color: black;
   border: 1px solid white;
